@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { createOrder } from './store';
 
@@ -51,6 +52,7 @@ const Orders = ()=> {
                 ({ order.quantity })
                 <br />
                 { order.quantity * product.price } Sub Total
+                <Link to={`/orders/${order.id}`}>Edit</Link>
               </li>
             );
           })

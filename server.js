@@ -38,6 +38,17 @@ app.get('/api/orders', (req, res, next)=> {
     .catch(next);
 });
 
+app.put('/api/orders/:id', async(req, res, next)=> {
+  try {
+    const order = await Order.findByPk(req.params.id);
+    await order.update(req.body);
+    res.send(order);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 app.put('/api/products/:id', (req, res, next)=> {
   Product.findByPk(req.params.id)
     .then( product => product.update(req.body))

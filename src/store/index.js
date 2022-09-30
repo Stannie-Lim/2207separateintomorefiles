@@ -20,6 +20,9 @@ const orders = (state = [], action)=> {
   if(action.type === 'CREATE_ORDER'){
     return [...state, action.order];
   }
+  if(action.type === 'UPDATE_ORDER'){
+    return state.map(order => order.id === action.order.id ? action.order : order);
+  }
   return state;
 }
 
@@ -52,6 +55,13 @@ const _createOrder = order => {
   };
 };
 
+const _updateOrder = order => {
+  return {
+    type: 'UPDATE_ORDER',
+    order
+  };
+};
+
 export const fetchProducts = ()=> {
   return async(dispatch)=> {
     const response = await axios.get('/api/products');
@@ -72,6 +82,14 @@ export const createOrder = (order)=> {
     dispatch(_createOrder(response.data));
   };
 };
+
+export const updateOrder = (order)=> {
+  return async(dispatch)=> {
+    const response = await axios.put(`/api/orders/${order.id}`, order);
+    dispatch(_updateOrder(order));
+  };
+};
+
 export const updateProduct = (product, navigate)=> {
   return async(dispatch)=> {
     const response = await axios.put(`/api/products/${product.id}`, product);

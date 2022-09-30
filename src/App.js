@@ -5,6 +5,7 @@ import { fetchProducts, fetchOrders } from './store';
 import Products from './Products';
 import Orders from './Orders';
 import ProductUpdate from './ProductUpdate';
+import OrderUpdate from './OrderUpdate';
 
 const App = ()=> {
   const { orders, products } = useSelector(state => state);
@@ -29,6 +30,7 @@ const App = ()=> {
         <Route path='/products' element={ <Products /> } />
         <Route path='/orders' element={ <Orders /> } />
         <Route path='/products/:id' element={ <ProductUpdate /> } />
+        <Route path='/orders/:id' element={ <OrderUpdate /> } />
       </Routes>
     </div>
   );
